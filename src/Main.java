@@ -9,7 +9,7 @@ public class Main {
 		int inputLayerSize = 350;
 		int hiddenLayerSize = 40;
 		int outputLayerSize = 1;
-		int maxIteration = 200;
+		int maxIteration = 1000;
 		double lambda = 1.0;
 		double lr = 0.1;
 		
@@ -31,8 +31,8 @@ public class Main {
 		testDatum.readData("data/autism-test-20");
         
 		//debug file
-		Datum debugDatum = new Datum(3, 5, 3, 5);
-		debugDatum.readData("data/test2");
+//		Datum debugDatum = new Datum(3, 5, 3, 5);
+//		debugDatum.readData("data/test2");
 		
 		//testInput(datum);
 		
@@ -46,6 +46,7 @@ public class Main {
 		nnm.setLearningRate(lr);
 		nnm.setLambda(lambda);
 		nnm.setMaxIteration(maxIteration);
+		
 		
 		nnm.train(trainDatum.getAllX(), trainDatum.getAllY());
 		nnm.test(testDatum.getAllX(), testDatum.getAllY());

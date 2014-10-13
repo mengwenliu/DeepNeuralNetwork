@@ -581,17 +581,23 @@ public class NeuralNetworkModel {
 	
 	private ArrayList<SimpleMatrix> gradientDescent(ArrayList<SimpleMatrix> gradients, ArrayList<SimpleMatrix> params, double lr) {
 		double update;
+		double epsilon = 1e-4;
 		ArrayList<SimpleMatrix> updateParams = new ArrayList<SimpleMatrix>();
 		for (int i=0; i < gradients.size(); i++) {
 			SimpleMatrix updateParam = new SimpleMatrix(gradients.get(i));
 			for (int j=0; j < gradients.get(i).numRows(); j++) {
 				for (int k=0; k < gradients.get(i).numCols(); k++) {
 					update = params.get(i).get(j, k) - lr * gradients.get(i).get(j, k);
-					//System.out.println(update);
 					updateParam.set(j, k, update);				
+					//System.out.println(update);
 				}
 			}
-			updateParams.add(updateParam);
+			if(updateParam.minus(params.get(i)).normF() < epsilon) {
+				updateParams.add(params.get(i));
+			}
+			else {
+				updateParams.add(updateParam);
+			}
 		}
 		return updateParams;
 	}
