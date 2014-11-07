@@ -4,7 +4,7 @@ import org.ejml.simple.*;
 
 import java.lang.Object;
 
-public class NeuralNetworkModel {
+public class DeepNeuralNetworkModel {
 	
 	protected SimpleMatrix allX, allY, theta1, theta2;
 	
@@ -28,7 +28,9 @@ public class NeuralNetworkModel {
 	// activations in each layer
 	private SimpleMatrix a1, a2, p;
 	
-	public NeuralNetworkModel() {
+	private PlotCostFunction plotCostFunction = new PlotCostFunction();
+	
+	public DeepNeuralNetworkModel() {
 		
 	}
 	
@@ -89,6 +91,10 @@ public class NeuralNetworkModel {
 
 		ArrayList<SimpleMatrix> params = new ArrayList<SimpleMatrix>();
 
+		double[] x = new double[maxIter];
+		double[] y = new double[maxIter];
+
+		
 		for (int i=0; i < this.maxIter; i++) {
 			System.out.println("iteration: " + (i+1));
 			prediction(theta1, theta2, allX);
@@ -122,9 +128,13 @@ public class NeuralNetworkModel {
 			theta1 = updateParams.get(0).copy();
 			theta2 = updateParams.get(1).copy();
 			allX = updateParams.get(2).copy();
+			
+			x[i] = i+1;
+			y[i] = regCost;
 
 		}
 		//printMatrixDimension(allX, "allX");
+		plotCostFunction.plotCurves(x, y);
 	}
 	
 	public void test(SimpleMatrix testX, SimpleMatrix testY) {

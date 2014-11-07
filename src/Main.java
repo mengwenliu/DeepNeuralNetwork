@@ -24,11 +24,11 @@ public class Main {
 		
 		//train file
 		Datum trainDatum = new Datum(inputLayerSize, numTrainExamples, outputLayerSize, numTrainExamples);
-		trainDatum.readData("data/autism-train-80");
+		trainDatum.readData("data/autism-train-80.csv");
 		
 		//test file
 		Datum testDatum = new Datum(inputLayerSize, numTestExamples, outputLayerSize, numTestExamples);
-		testDatum.readData("data/autism-test-20");
+		testDatum.readData("data/autism-test-20.csv");
         
 		//debug file
 //		Datum debugDatum = new Datum(3, 5, 3, 5);
@@ -36,7 +36,7 @@ public class Main {
 		
 		//testInput(datum);
 		
-		NeuralNetworkModel nnm = new NeuralNetworkModel();
+		DeepNeuralNetworkModel nnm = new DeepNeuralNetworkModel();
 		
 		nnm.setInputLayerSize(inputLayerSize);
 		nnm.setHiddenLayerSize(hiddenLayerSize);
